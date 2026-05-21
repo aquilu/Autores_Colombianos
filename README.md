@@ -296,6 +296,63 @@ Autores_Colombianos/
 > *"Estudiar esas formas para proponer una solución práctica a una necesidad concreta tiene que ver con hacer visible la recuperación de un patrimonio desconocido, es un guiño para invitar a mirar de nuevo."*
 > — Juan Pablo Fajardo, sobre BLAA.
 
+### Ilustración del Vol. II · `assets/lij-hero.png`
+
+La ilustración hero del **Volumen II (LIJ)** fue generada con **OpenAI** (modelo de imagen *ChatGPT Image / DALL·E*) y refinada manualmente para integrarse a la paleta editorial del atlas (tierra · selva · cinabrio · azul profundo).
+
+**Modelo:** OpenAI ChatGPT Image · `gpt-image-1`
+**Generada:** 14 de mayo de 2026
+**Archivo fuente:** `uploads/ChatGPT Image 14 may 2026, 12_54_25 p.m..png`
+**Render servido:** `assets/lij-hero.png`
+
+<details>
+<summary><strong>📝 Prompt original — clic para expandir</strong></summary>
+
+```text
+Ilustración editorial panorámica inspirada en la literatura infantil y juvenil
+colombiana contemporánea. Una gran biblioteca viva y fantástica emerge en medio
+de un paisaje colombiano lleno de imaginación. Los libros abiertos se convierten
+en caminos, montañas, ríos y ciudades ilustradas donde conviven niños lectores,
+autores, ilustradores y personajes míticos.
+
+En el centro de la escena aparece una mesa creativa llena de bocetos, pinceles,
+acuarelas, lápices de color y páginas de libro álbum en proceso de creación.
+Alrededor, figuras inspiradas en grandes autores colombianos de LIJ —sin
+retratos exactos, sino evocaciones artísticas— dialogan con ilustradores
+mientras criaturas fantásticas salen de las páginas: jaguares hechos de tinta,
+aves tropicales formadas con recortes de papel, espíritus de la selva
+convertidos en acuarela y personajes inspirados en la tradición oral colombiana.
+
+La composición mezcla distintos géneros y capas narrativas:
+
+* un rincón de cómic y novela gráfica con viñetas flotantes,
+* escenas de memoria y conflicto reinterpretadas con sensibilidad poética,
+* espacios de juego y vida cotidiana infantil,
+* territorios biodiversos colombianos llenos de fauna y vegetación,
+* zonas de fantasía y ciencia ficción latinoamericana,
+* elementos de poesía visual con letras suspendidas como música en el aire.
+
+En el horizonte aparecen referencias sutiles a la internacionalización de la
+literatura colombiana: ferias del libro internacionales, libros volando sobre
+mapas, traducciones, catálogos editoriales y conexiones entre Colombia y el
+mundo. La atmósfera transmite que las historias colombianas viajan globalmente
+sin perder sus raíces culturales.
+
+Estilo visual:
+mezcla de ilustración editorial contemporánea, libro álbum, collage artesanal,
+gouache, acuarela digital y texturas de papel impreso. Influencia de la Feria
+del Libro de Bolonia y de ilustración latinoamericana moderna. Composición
+rica en detalles, cálida, emotiva y profundamente narrativa. Colores tierra,
+verdes selváticos, azules profundos y rojos editoriales. Luz suave
+cinematográfica, sensación de descubrimiento, imaginación y memoria colectiva.
+Alta definición, extremadamente detallada, estética premium de portada
+editorial cultural.
+```
+
+</details>
+
+> ℹ️ El prompt se conserva textual para reproducibilidad y trazabilidad editorial. Cualquier re-generación o variación queda documentada al lado de su prompt fuente.
+
 ---
 
 ## 🖥️ Comandos rápidos (la "CLI")
@@ -336,6 +393,145 @@ git add . && git commit -m "atlas: snapshot MMXXVI" && git push
 | Saltar a sección | Click en eyebrow del capítulo |
 | Modo impresión | navegar a `/index-print.html` |
 | Deep link a LIJ | `index.html#lij` |
+
+---
+
+## 🖨️ Exportación para imprenta y maquetación
+
+Este atlas fue diseñado **pensando en pantalla**, pero su arquitectura — SVG vectorial vía D3, tipografía BLAA local, paleta declarativa en CSS — lo hace exportable directo a flujos editoriales profesionales **sin modificar el código del proyecto**.
+
+> 📰 Caso de uso: el atlas se va a incluir en el **Boletín Cultural y Bibliográfico** del Banco de la República, maquetado en **Adobe InDesign**. Los formatos preferidos por el equipo editorial son **PDF de alta calidad** y **Figma**.
+
+### A · PDF press-ready (recomendado para InDesign)
+
+`index-print.html` ya entrega los dos volúmenes en una sola pieza maquetable. Para producir un PDF *colocable* en InDesign con vectores intactos y BLAA embebida:
+
+```bash
+# 1 · servir el atlas localmente
+python -m http.server 8080
+
+# 2 · render headless a PDF (Chrome / Edge / Brave funcionan igual)
+chrome --headless=new --disable-gpu \
+       --no-pdf-header-footer \
+       --virtual-time-budget=15000 \
+       --run-all-compositor-stages-before-draw \
+       --print-to-pdf=atlas-boletin.pdf \
+       --print-to-pdf-no-header \
+       "http://localhost:8080/index-print.html"
+```
+
+En Windows con Edge:
+
+```powershell
+& "C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe" `
+   --headless=new --disable-gpu `
+   --no-pdf-header-footer --virtual-time-budget=15000 `
+   --print-to-pdf="$PWD\atlas-boletin.pdf" `
+   "http://localhost:8080/index-print.html"
+```
+
+**Características del PDF resultante:**
+
+- ✅ **SVG preservado como vector** (mapas, redes, mural) — sin rasterización.
+- ✅ **Texto seleccionable y buscable** — biografías, obras, premios.
+- ✅ **BLAA embebida** automáticamente (la sirve el navegador desde `src/fonts/*.woff2`).
+- ✅ **Tamaño A4 vertical** por defecto. Para tamaño custom del Boletín, añade `--paper-width=` y `--paper-height=` (en pulgadas).
+
+**En InDesign:** `File → Place → atlas-boletin.pdf` → el PDF entra como objeto enlazado, recortable por marco. Cada página queda disponible vía `Show Import Options → All Pages`. Mantiene vectores y fuentes.
+
+### B · Exportar SVGs individuales para Figma / Illustrator
+
+Cada visualización del atlas — los dos mapas de Colombia, los dos mapas-mundi, la red de circulación, el mural de retratos, el hero de arcos — es **SVG nativo de D3**. Se pueden descargar uno a uno **sin tocar el código**, pegando este snippet en la consola del navegador (`F12 → Console`) con el atlas abierto:
+
+```javascript
+// Descarga TODOS los SVG visibles como archivos .svg independientes
+(function exportAllSVGs() {
+  const svgs = document.querySelectorAll('svg');
+  console.log(`📥 Encontrados ${svgs.length} SVG(s) — descargando…`);
+  svgs.forEach((svg, i) => {
+    const clone = svg.cloneNode(true);
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.setAttribute('xmlns:xlink', 'http://www.w3.org/1999/xlink');
+    if (!clone.getAttribute('viewBox')) {
+      const r = svg.getBoundingClientRect();
+      clone.setAttribute('viewBox', `0 0 ${r.width} ${r.height}`);
+    }
+    // inline computed styles para que se vea igual fuera del DOM
+    const cs = getComputedStyle(svg);
+    clone.style.font = cs.font;
+    const xml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+                new XMLSerializer().serializeToString(clone);
+    const blob = new Blob([xml], { type: 'image/svg+xml;charset=utf-8' });
+    const url  = URL.createObjectURL(blob);
+    const section = svg.closest('section');
+    const label = (section?.id ||
+                   section?.querySelector('.chapter-title, .lij-hero-title')?.textContent
+                   || 'svg').trim()
+                  .replace(/[^a-z0-9-]/gi, '_').toLowerCase().slice(0, 40);
+    const a = Object.assign(document.createElement('a'), {
+      href: url,
+      download: `${String(i+1).padStart(2,'0')}-${label}.svg`
+    });
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  });
+  console.log('✅ Listo. Revisa tu carpeta de descargas.');
+})();
+```
+
+**Para exportar solo una visualización** (por ejemplo el mapa de Colombia): haz click derecho sobre el mapa → *Inspeccionar* → click derecho en el `<svg>` del panel → *Copy → Copy outerHTML* → pega en un archivo `.svg`.
+
+### C · Importar a Figma
+
+1. En Figma, abre el archivo destino y arrastra el `.svg` (o `Ctrl/Cmd+V` con el outerHTML pegado).
+2. Figma respeta:
+   - ✅ Geometría vectorial (paths de mapas, líneas de la red)
+   - ✅ Colores del CSS inline
+   - ✅ Estructura de grupos (`<g>` → frames anidados)
+   - ⚠️ Tipografía: si BLAA no está instalada en la máquina del maquetador, Figma sustituye por una fuente similar. **Instala BLAA antes** desde `src/fonts/` o desde `uploads/tipografia_subgerencia_cultural/` (otf · ttf · webfonts disponibles).
+
+### D · Colocar en InDesign
+
+| Formato | Cuándo usarlo | Cómo |
+|---|---|---|
+| **PDF de la sección A** | Lámina completa del atlas como pieza editorial | `File → Place` → elige página(s) → escala al marco |
+| **SVG individual de la sección B** | Solo un mapa o solo la red | InDesign 2024+ acepta SVG (`File → Place`); o pasar por Illustrator → guardar como `.ai` |
+| **PNG/TIFF de respaldo** | Solo si la maquetación no acepta vector | `Print → Save as PDF → Photoshop @ 300dpi CMYK` (último recurso, pierde escalabilidad) |
+
+> 🔤 **Importante para el maquetador:** la tipografía **BLAA debe estar instalada** en el equipo de producción. Está disponible en `uploads/tipografia_subgerencia_cultural/` en formatos `.otf`, `.ttf`, `.eot`, `.woff`, `.woff2`. Es **uso libre** por decisión del Banco de la República (ver `data/blaa_readme.txt`).
+
+### E · Especificaciones sugeridas para el Boletín Cultural y Bibliográfico
+
+Si el equipo del Boletín confirma las specs editoriales finales, este atlas se adapta fácilmente. Defaults razonables mientras tanto:
+
+| Parámetro | Valor sugerido |
+|---|---|
+| Formato de página | 17 × 24 cm (típico del Boletín Banrep) |
+| Sangrado | 3 mm |
+| Espacio de color | CMYK · perfil **Fogra39** o **ISO Coated v2** |
+| Resolución mínima de imagen | 300 dpi para PNG/TIFF; vector para SVG/PDF |
+| Tipografía embebida | BLAA (todos los pesos), fallback Cormorant Garamond |
+| Negro de texto | C0 M0 Y0 K100 (no enriquecido) |
+| Marcas de corte | activadas al exportar PDF/X-1a desde InDesign |
+
+> 📐 Para customizar el PDF a 17×24 cm directamente desde el render:
+> ```bash
+> chrome --headless=new --no-pdf-header-footer \
+>        --paper-width=6.7  --paper-height=9.45 \
+>        --print-to-pdf=atlas-17x24.pdf \
+>        http://localhost:8080/index-print.html
+> ```
+
+### F · Checklist de entrega editorial
+
+Antes de mandar al Boletín:
+
+- [ ] PDF generado desde `index-print.html` con BLAA embebida ✓ (verificable con `pdffonts atlas.pdf`)
+- [ ] SVGs individuales exportados (snippet de la sección B) para uso suelto
+- [ ] Carpeta `uploads/tipografia_subgerencia_cultural/` adjunta para el maquetador
+- [ ] Créditos al pie del bloque o lámina: *"Atlas de Autores Colombianos · Red Cultural del Banco de la República · MMXXVI"*
+- [ ] Ilustración hero del Vol. II acreditada: *"Ilustración generada con OpenAI (DALL·E / ChatGPT Image)"* + prompt fuente disponible en `README.md`
+- [ ] Fuentes de datos referenciadas: *"El florecimiento de la literatura infantil y juvenil en Colombia"* — Beatriz Helena Robledo B.
 
 ---
 
