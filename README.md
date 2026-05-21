@@ -9,6 +9,13 @@
 **Un atlas curatorial, editorial y cartográfico de la literatura colombiana — general e infantil & juvenil — del primer cuarto del siglo XXI.**
 Construido para la **Red Cultural del Banco de la República**, ilustrado con IA, tipografiado con **BLAA**.
 
+### 🌐 **Demo en vivo → [aquilu.github.io/Autores_Colombianos](https://aquilu.github.io/Autores_Colombianos/)**
+
+[![Live](https://img.shields.io/badge/demo-live-2e4a37?style=flat-square)](https://aquilu.github.io/Autores_Colombianos/)
+[![Print](https://img.shields.io/badge/versión-impresión-8a2a1c?style=flat-square)](https://aquilu.github.io/Autores_Colombianos/index-print.html)
+[![Pages](https://img.shields.io/badge/GitHub%20Pages-built-b58b3a?style=flat-square&logo=github)](https://aquilu.github.io/Autores_Colombianos/)
+[![Stack](https://img.shields.io/badge/stack-React%2018%20·%20D3%20v7-1d324a?style=flat-square)](#-arquitectura)
+
 `React 18` · `D3 v7` · `TopoJSON` · `JSX en navegador (Babel)` · `100% estático` · `0 backend`
 
 </div>
@@ -16,6 +23,10 @@ Construido para la **Red Cultural del Banco de la República**, ilustrado con IA
 ---
 
 ## ✨ TL;DR
+
+**¿Solo quieres verlo?** → <https://aquilu.github.io/Autores_Colombianos/>
+
+**¿Quieres correrlo local?**
 
 ```bash
 git clone https://github.com/aquilu/Autores_Colombianos.git
@@ -162,11 +173,18 @@ Luego visita:
 
 ### Opción C — desplegar a GitHub Pages
 
+Este repo ya tiene Pages activo en **<https://aquilu.github.io/Autores_Colombianos/>** — cada `git push` a `main` re-dispara el build (~30–60 s, sin Jekyll).
+
+Para replicarlo en tu propio fork:
+
 ```bash
-git clone https://github.com/aquilu/Autores_Colombianos.git
+git clone https://github.com/<tu-usuario>/Autores_Colombianos.git
 cd Autores_Colombianos
 git push origin main
-# Settings → Pages → Source: main / root
+# Vía gh CLI:
+gh api -X POST repos/<tu-usuario>/Autores_Colombianos/pages \
+   -f "source[branch]=main" -f "source[path]=/"
+# o por UI: Settings → Pages → Source: main / root
 ```
 
 Y listo. No hay paso de build.
@@ -507,6 +525,8 @@ Y a quien sea que llegó hasta acá leyendo: gracias por mirar de nuevo. 🌎
 
 **Atlas de Autores Colombianos · MMXXVI**
 *Red Cultural del Banco de la República · Bogotá D.C. · 04°35′N 74°04′O*
+
+🌐 <https://aquilu.github.io/Autores_Colombianos/>
 
 `584 voces · 1.163 sellos editoriales · 58 países · 45 lenguas · 1 país que se deja leer en el mundo`
 
