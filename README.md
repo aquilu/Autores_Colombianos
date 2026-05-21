@@ -9,7 +9,7 @@
 **Un atlas curatorial, editorial y cartográfico de la literatura colombiana — general e infantil & juvenil — del primer cuarto del siglo XXI.**
 Construido para la **Red Cultural del Banco de la República**, ilustrado con IA, tipografiado con **BLAA**.
 
-### 🌐 **Demo en vivo → [aquilu.github.io/Autores_Colombianos](https://aquilu.github.io/Autores_Colombianos/)**
+### 🌐 **Demo en vivo → <a href="https://aquilu.github.io/Autores_Colombianos/" target="_blank" rel="noopener noreferrer">aquilu.github.io/Autores_Colombianos <img src="https://api.iconify.design/material-symbols/open-in-new.svg?color=%23b58b3a" width="14" height="14" alt="abrir en otra pestaña" align="center" /></a>**
 
 [![Live](https://img.shields.io/badge/demo-live-2e4a37?style=flat-square)](https://aquilu.github.io/Autores_Colombianos/)
 [![Print](https://img.shields.io/badge/versión-impresión-8a2a1c?style=flat-square)](https://aquilu.github.io/Autores_Colombianos/index-print.html)
@@ -24,7 +24,7 @@ Construido para la **Red Cultural del Banco de la República**, ilustrado con IA
 
 ## ✨ TL;DR
 
-**¿Solo quieres verlo?** → <https://aquilu.github.io/Autores_Colombianos/>
+**¿Solo quieres verlo?** → <a href="https://aquilu.github.io/Autores_Colombianos/" target="_blank" rel="noopener noreferrer">https://aquilu.github.io/Autores_Colombianos/ <img src="https://api.iconify.design/material-symbols/open-in-new.svg?color=%238a2a1c" width="14" height="14" alt="abrir en otra pestaña" align="center" /></a>
 
 **¿Quieres correrlo local?**
 
@@ -526,7 +526,7 @@ Y a quien sea que llegó hasta acá leyendo: gracias por mirar de nuevo. 🌎
 **Atlas de Autores Colombianos · MMXXVI**
 *Red Cultural del Banco de la República · Bogotá D.C. · 04°35′N 74°04′O*
 
-🌐 <https://aquilu.github.io/Autores_Colombianos/>
+🌐 <a href="https://aquilu.github.io/Autores_Colombianos/" target="_blank" rel="noopener noreferrer">aquilu.github.io/Autores_Colombianos <img src="https://api.iconify.design/material-symbols/open-in-new.svg?color=%23b58b3a" width="14" height="14" alt="abrir en otra pestaña" align="center" /></a>
 
 `584 voces · 1.163 sellos editoriales · 58 países · 45 lenguas · 1 país que se deja leer en el mundo`
 
