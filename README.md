@@ -305,8 +305,7 @@ La ilustración hero del **Volumen II (LIJ)** fue generada con **OpenAI** (model
 **Archivo fuente:** `uploads/ChatGPT Image 14 may 2026, 12_54_25 p.m..png`
 **Render servido:** `assets/lij-hero.png`
 
-<details>
-<summary><strong>📝 Prompt original — clic para expandir</strong></summary>
+#### 📝 Prompt original (OpenAI · ChatGPT Image)
 
 ```text
 Ilustración editorial panorámica inspirada en la literatura infantil y juvenil
@@ -348,8 +347,6 @@ cinematográfica, sensación de descubrimiento, imaginación y memoria colectiva
 Alta definición, extremadamente detallada, estética premium de portada
 editorial cultural.
 ```
-
-</details>
 
 > ℹ️ El prompt se conserva textual para reproducibilidad y trazabilidad editorial. Cualquier re-generación o variación queda documentada al lado de su prompt fuente.
 
