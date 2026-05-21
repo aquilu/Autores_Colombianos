@@ -1,0 +1,64 @@
+/* === BLAA — Subgerencia Cultural · Banco de la República === */
+/* Inspirada en las letras metálicas de la Biblioteca Luis Ángel Arango (1958)
+   Diseño: Juan Pablo Fajardo · Piedra, Tijera, Papel (2022) */
+
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-ExtraLight.woff2") format("woff2");
+  font-weight: 200; font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-ExtraLightItalic.woff2") format("woff2");
+  font-weight: 200; font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-Light.woff2") format("woff2");
+  font-weight: 300; font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-LightItalic.woff2") format("woff2");
+  font-weight: 300; font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-Regular.woff2") format("woff2");
+  font-weight: 400; font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-Italic.woff2") format("woff2");
+  font-weight: 400; font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-Bold.woff2") format("woff2");
+  font-weight: 700; font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-BoldItalic.woff2") format("woff2");
+  font-weight: 700; font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-UltraBold.woff2") format("woff2");
+  font-weight: 900; font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "BLAA";
+  src: url("fonts/BLAA-UltraBoldItalic.woff2") format("woff2");
+  font-weight: 900; font-style: italic;
+  font-display: swap;
+}

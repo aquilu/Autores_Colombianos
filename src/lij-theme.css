@@ -1,0 +1,607 @@
+/* === LIJ-specific theme overrides === */
+/* Maintains the editorial identity but introduces warmer accents
+   and a slightly different chromatic palette. */
+
+:root {
+  --lij-rojo: #a82b1a;        /* rojo más profundo, casi sangre de toro */
+  --lij-rojo-vivo: #c63f1f;   /* bermellón para acentos puntuales */
+  --lij-rojo-deep: #6e1b10;
+  --lij-verde: #2d5a3d;
+  --lij-verde-2: #4a7d5a;
+  --lij-verde-3: #6b9874;
+  --lij-azul: #2a4f6e;
+  --lij-mostaza: #d4a843;
+  --lij-petalo: #d97a5f;
+  --lij-tinta: #2b1d13;       /* marrón tinta para textos secundarios */
+  --lij-cream: #f4ecdc;       /* fondo de la caja-respiro */
+}
+
+/* Tab navigation */
+.tabnav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  background: var(--ivory);
+  border-bottom: 1px solid var(--ink);
+}
+.tabnav-inner {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  padding: 0;
+}
+.tabnav-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+.tabnav-mark {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  color: var(--rojo);
+}
+.tabnav-label {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+.tabnav-tabs {
+  display: flex;
+  gap: 0;
+}
+.tab-btn {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.15rem;
+  padding: 1rem 1.5rem;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--f-display);
+  color: var(--ink-soft);
+  border-left: 1px solid var(--rule);
+  transition: color 0.2s, background 0.2s;
+}
+.tab-btn:hover { color: var(--ink); background: var(--ivory-2); }
+.tab-btn.active { color: var(--ink); }
+.tab-btn.active::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -1px;
+  height: 3px;
+  background: var(--rojo);
+}
+.tab-btn .tab-no {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--rojo);
+  font-weight: 500;
+}
+.tab-btn .tab-name {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+@media (max-width: 780px) {
+  .tabnav-brand .tabnav-label { display: none; }
+  .tab-btn { padding: 0.75rem 1rem; }
+  .tab-btn .tab-name { font-size: 1.1rem; }
+}
+
+/* === LIJ hero === */
+.lij-hero {
+  position: relative;
+  min-height: calc(100vh - 60px);
+  display: grid;
+  grid-template-rows: 1fr;
+  overflow: hidden;
+  background: var(--paper);
+}
+.lij-hero-illustration {
+  position: absolute; inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 1;
+}
+/* Lateral gradient: cream on the left where the text lives,
+   transparent on the right where the illustration breathes.
+   PLUS a soft top fade so the handwritten title baked into
+   the illustration is attenuated (~35-40%) and does not
+   compete with the typographic title. */
+.lij-hero-illustration::after {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    /* top fade — attenuates the baked-in handwritten line */
+    linear-gradient(
+      180deg,
+      rgba(244,236,220,0.55) 0%,
+      rgba(244,236,220,0.30) 8%,
+      rgba(244,236,220,0.0) 18%
+    ),
+    /* side fade — cream where the text lives */
+    linear-gradient(
+      100deg,
+      rgba(244,236,220,0.72) 0%,
+      rgba(244,236,220,0.55) 28%,
+      rgba(244,236,220,0.20) 50%,
+      rgba(244,236,220,0.05) 68%,
+      rgba(244,236,220,0.0) 82%
+    );
+}
+/* Bottom fade into ivory so the next section reads as a continuation */
+.lij-hero-illustration::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(241,231,208,0) 0%,
+    rgba(241,231,208,0) 70%,
+    rgba(241,231,208,0.6) 90%,
+    var(--ivory) 100%
+  );
+  z-index: 1;
+}
+
+.lij-hero-mat {
+  position: absolute; inset: 1.5rem;
+  border: 1px solid rgba(20,17,13,0.25);
+  pointer-events: none;
+  z-index: 1;
+}
+.lij-hero-mat::before, .lij-hero-mat::after {
+  content: "";
+  position: absolute;
+  width: 24px; height: 24px;
+  border: 1px solid rgba(20,17,13,0.4);
+}
+.lij-hero-mat::before { top: -12px; left: -12px; border-right: 0; border-bottom: 0; }
+.lij-hero-mat::after { bottom: -12px; right: -12px; border-left: 0; border-top: 0; }
+
+.lij-hero-body {
+  position: relative;
+  z-index: 2;
+  align-self: center;
+  padding: 4rem 0 3rem;
+  display: grid;
+  grid-template-columns: minmax(0, 720px) 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+@media (max-width: 980px) {
+  .lij-hero-body { grid-template-columns: 1fr; }
+}
+
+/* Translucent cream "card" that gives the type its own stage */
+.lij-hero-card {
+  position: relative;
+  background: rgba(244, 236, 220, 0.88);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 3rem 3rem 2.5rem;
+  border: 1px solid rgba(43, 29, 19, 0.18);
+}
+.lij-hero-card::before {
+  content: "";
+  position: absolute;
+  top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid rgba(43, 29, 19, 0.15);
+  pointer-events: none;
+}
+@media (max-width: 780px) {
+  .lij-hero-card { padding: 2rem 1.5rem; }
+}
+
+.lij-hero-kicker {
+  display: inline-flex; align-items: center; gap: 0.7rem;
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--lij-tinta);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+.lij-hero-kicker .rule {
+  width: 2rem; height: 1px; background: var(--lij-rojo);
+  display: inline-block;
+}
+
+.lij-hero-title {
+  font-family: var(--f-display);
+  font-weight: 400;
+  font-style: italic;
+  font-size: clamp(3.2rem, 6.8vw, 5.6rem);
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  color: var(--lij-tinta);
+  max-width: 16ch;
+  margin: 0;
+  /* halo to lift letters off any residual illustration */
+  text-shadow:
+    0 0 6px rgba(244, 236, 220, 0.6),
+    0 0 2px rgba(244, 236, 220, 0.8);
+}
+.lij-hero-title em {
+  font-weight: 700;
+  font-style: italic;
+  color: var(--lij-rojo);
+}
+.lij-hero-title .thin {
+  font-weight: 300;
+  font-style: italic;
+  color: var(--lij-tinta);
+}
+
+.lij-hero-sub {
+  font-family: var(--f-serif);
+  font-style: normal;
+  font-weight: 400;
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--lij-tinta);
+  max-width: 52ch;
+  margin: 1.75rem 0 0;
+  text-shadow: 0 0 4px rgba(244, 236, 220, 0.5);
+}
+.lij-hero-sub em {
+  font-style: italic;
+  color: var(--lij-rojo);
+  font-weight: 500;
+}
+
+.lij-hero-meta {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem 1.75rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(43, 29, 19, 0.18);
+}
+@media (max-width: 780px) {
+  .lij-hero-meta { grid-template-columns: repeat(2, 1fr); }
+}
+.lij-hero-stat-n {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: clamp(2.1rem, 3vw, 2.8rem);
+  line-height: 0.9;
+  color: var(--lij-rojo);
+}
+.lij-hero-stat-l {
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lij-tinta);
+  margin-top: 0.5rem;
+  opacity: 0.85;
+}
+
+.lij-hero-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+.lij-hero-cta .btn-primary {
+  background: var(--lij-rojo);
+  border-color: var(--lij-rojo);
+}
+.lij-hero-cta .btn-primary:hover {
+  background: var(--lij-rojo-deep);
+  border-color: var(--lij-rojo-deep);
+}
+
+.lij-hero-coord {
+  position: absolute;
+  z-index: 3;
+  top: 2.5rem; right: 2.5rem;
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lij-tinta);
+  text-align: right;
+  line-height: 1.6;
+  background: rgba(244, 236, 220, 0.7);
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(43, 29, 19, 0.18);
+}
+
+/* === 8 voces (thematic axes) === */
+.voces-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  margin-top: 3rem;
+  border: 1px solid var(--ink);
+}
+@media (max-width: 980px) { .voces-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 480px) { .voces-grid { grid-template-columns: 1fr; } }
+.voz-cell {
+  position: relative;
+  padding: 2rem 1.75rem 1.75rem;
+  cursor: pointer;
+  background: var(--ivory);
+  transition: background 0.3s ease, color 0.3s ease;
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  min-height: 240px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.75rem;
+}
+.voz-cell:nth-child(4n) { border-right: 0; }
+.voz-cell:nth-last-child(-n+4) { border-bottom: 0; }
+@media (max-width: 980px) {
+  .voz-cell:nth-child(4n) { border-right: 1px solid var(--ink); }
+  .voz-cell:nth-child(2n) { border-right: 0; }
+  .voz-cell:nth-last-child(-n+4) { border-bottom: 1px solid var(--ink); }
+  .voz-cell:nth-last-child(-n+2) { border-bottom: 0; }
+}
+.voz-cell:hover {
+  background: var(--lij-verde);
+  color: var(--ivory);
+}
+.voz-cell:hover .voz-no { color: var(--lij-mostaza); }
+.voz-cell:hover .voz-stat-n { color: var(--lij-mostaza); }
+.voz-cell:hover .voz-stat-l { color: rgba(241,231,208,0.7); }
+
+.voz-cell.active {
+  background: var(--lij-rojo);
+  color: var(--ivory);
+}
+.voz-cell.active .voz-no,
+.voz-cell.active .voz-stat-n { color: var(--ivory); }
+.voz-cell.active .voz-stat-l { color: rgba(241,231,208,0.85); }
+
+.voz-no {
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--lij-rojo);
+  transition: color 0.3s;
+}
+.voz-name {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 2vw, 2rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+.voz-sub {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.3;
+  opacity: 0.85;
+}
+.voz-stat {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-top: 1px solid currentColor;
+  padding-top: 0.65rem;
+  opacity: 0.85;
+}
+.voz-stat-n {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: 1.6rem;
+  line-height: 1;
+  color: var(--lij-rojo);
+  transition: color 0.3s;
+}
+.voz-stat-l {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  transition: color 0.3s;
+}
+
+/* === LIJ world map (city-level) === */
+.lij-world-frame {
+  position: relative;
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--ivory);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+}
+.lij-world-frame.light {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Fair markers */
+.fair-card {
+  background: var(--ivory);
+  border: 1px solid var(--ink);
+  padding: 1.5rem;
+  display: grid;
+  gap: 0.4rem;
+  transition: background 0.2s, color 0.2s;
+}
+.fair-card:hover {
+  background: var(--lij-verde);
+  color: var(--ivory);
+}
+.fair-card:hover .fair-meta { color: rgba(241,231,208,0.7); }
+.fair-card:hover .fair-name { color: var(--lij-mostaza); }
+
+.fair-no {
+  font-family: var(--f-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--lij-rojo);
+}
+.fair-name {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: 1.6rem;
+  line-height: 1;
+  margin: 0;
+}
+.fair-meta {
+  font-family: var(--f-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+/* === Cronología (Capítulo V LIJ) === */
+.cronologia {
+  list-style: none;
+  margin: 3rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+.crono-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 1.5rem;
+  position: relative;
+}
+.crono-year-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.crono-year {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  font-size: clamp(2.2rem, 3vw, 2.8rem);
+  line-height: 1;
+  color: var(--accent);
+  position: relative;
+  z-index: 1;
+  letter-spacing: -0.02em;
+}
+.crono-year::before {
+  content: "";
+  position: absolute;
+  left: -22px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 4px var(--ivory);
+}
+.crono-rail {
+  position: absolute;
+  left: -18px;
+  top: 50%;
+  bottom: -3rem;
+  width: 1px;
+  background: linear-gradient(180deg, var(--accent), var(--rule));
+  opacity: 0.4;
+}
+
+.crono-card {
+  padding: 0 0 3rem 1.5rem;
+  border-left: 1px solid var(--rule-soft);
+  margin-left: -1.5rem;
+}
+.crono-cat {
+  font-family: var(--f-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+.crono-title {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 700;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin: 0 0 0.75rem;
+}
+.crono-body {
+  font-family: var(--f-serif);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ink-2);
+  margin: 0;
+  max-width: 62ch;
+}
+.crono-body.crono-quote {
+  font-family: var(--f-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.5vw, 1.4rem);
+  line-height: 1.4;
+  color: var(--ink);
+}
+.crono-refs {
+  list-style: none;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.crono-refs li {
+  font-family: var(--f-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--rule);
+  color: var(--ink-soft);
+  background: var(--ivory);
+  white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+  .crono-item { grid-template-columns: 1fr; gap: 0.75rem; }
+  .crono-year::before { display: none; }
+  .crono-rail { display: none; }
+  .crono-card { margin-left: 0; padding-left: 0; border-left: 0; padding-bottom: 2.5rem; border-bottom: 1px solid var(--rule); margin-bottom: 1rem; }
+}
+
+/* Make the display class use BLAA UltraBold for impact-y heads in LIJ */
+.lij-display {
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: -0.025em;
+}
+.lij-display-light {
+  font-family: var(--f-display);
+  font-weight: 200;
+  font-style: italic;
+  letter-spacing: -0.02em;
+}
