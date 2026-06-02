@@ -9,6 +9,8 @@
 **Un atlas curatorial, editorial y cartográfico de la literatura colombiana — general e infantil & juvenil — del primer cuarto del siglo XXI.**
 Construido para la **Red Cultural del Banco de la República**, ilustrado con IA, tipografiado con **BLAA**.
 
+**Tres salas, un mismo archivo** → *Literatura general* (Vol. I) · *Infantil & juvenil* (Vol. II) · *Tiny Desk Kids* — una escena íntima de lectura en voz alta sobre la misma LIJ.
+
 ### 🌐 **Demo en vivo → <a href="https://aquilu.github.io/Autores_Colombianos/" target="_blank" rel="noopener noreferrer">aquilu.github.io/Autores_Colombianos <img src="https://api.iconify.design/material-symbols/open-in-new.svg?color=%23b58b3a" width="14" height="14" alt="abrir en otra pestaña" align="center" /></a>**
 
 [![Live](https://img.shields.io/badge/demo-live-2e4a37?style=flat-square)](https://aquilu.github.io/Autores_Colombianos/)
@@ -46,7 +48,8 @@ No hay `npm install`. No hay bundler. No hay backend. **Solo abres el archivo.**
 
 ## 🗺️ Highlights
 
-- **Dos atlas, un mismo archivo.** Volumen I (Literatura general, 497 autores) + Volumen II (LIJ — Infantil & Juvenil, 87 autores) — navegables por pestañas o imprimibles como un libro de dos volúmenes.
+- **Dos atlas + una sala, un mismo archivo.** Volumen I (Literatura general, 497 autores) + Volumen II (LIJ — Infantil & Juvenil, 87 autores) + la sala **Tiny Desk Kids** (tab III) — navegables por pestañas o imprimibles como un libro de dos volúmenes.
+- **🎙️ Tiny Desk Kids — escena de lectura en voz alta.** Una tercera pestaña que toma el mismo dataset de LIJ y lo pone en clave de *concierto de escritorio*: hero, marquesina de nombres, sesiones destacadas (las voces que más han viajado), un programa de actos temáticos y un estante buscable. Paleta cálida propia (`--td-*`, tungsteno + colores de títere).
 - **1.588 + 425 pares autor·editorial** documentados par a par, cada uno con país, ciudad, lengua, sello y URL de la editorial. No hay agregados sin trazabilidad.
 - **Cartografía hecha a mano en D3.** Proyecciones `geoEquirectangular`, `geoMercator` y `geoOrthographic`, con grátula a 2° en Colombia y 20° en el mundo. Sin Mapbox, sin tiles, sin API keys.
 - **Tipografía BLAA** — la familia oficial del Banco de la República, revival de las letras metálicas de la Biblioteca Luis Ángel Arango (1958). Diez pesos en `woff2`, servidos localmente.
@@ -85,6 +88,23 @@ García Márquez, Mutis, Restrepo, Vásquez, Abad Faciolince, Caparrós, Cuélla
 
 Una lectura curatorial del **florecimiento de la LIJ colombiana** entre 2000 y 2024, articulada en seis voces del oficio: editoriales independientes, libro álbum, novela gráfica, memoria del conflicto, ferias internacionales (Bolonia, Guadalajara, Frankfurt) y políticas públicas de lectura.
 
+### 🎙️ Sala Tiny Desk Kids · lectura en voz alta
+
+```
+Mismo dataset del Vol. II (LIJ) — escenario distinto
+Hero + marquesina · Sesiones destacadas · Programa de actos · Estante buscable
+```
+
+Una tercera pestaña (tab **III · sesiones**) que no agrega datos nuevos: toma las mismas **87 voces de la LIJ** y las presenta como un *concierto de escritorio* al estilo del formato Tiny Desk. Tiene su propia paleta cálida (tungsteno + colores de títere) y se compone de:
+
+- **Hero + marquesina** — telón de entrada con la foto de escena y un *marquee* infinito con todos los nombres del cartel.
+- **Set 01 · Sesiones destacadas** — las seis voces que más lejos han viajado (más países, luego más ediciones), cada una con un *setlist* breve de obras.
+- **Programa · ocho actos** — el repertorio ordenado por voz temática (`data.themes`), con sus cabezas de cartel.
+- **Set 02 · El estante** — todo el cartel en orden alfabético, filtrable por voz temática y buscable por nombre o ciudad.
+- **Telón** — colofón de cierre. Cualquier nombre, ficha o lomo abre el `AuthorDrawer` compartido con los demás volúmenes.
+
+Deep link directo: `index.html#tinydesk` (también `#td`).
+
 ---
 
 ## 🧭 How it works (short)
@@ -112,19 +132,24 @@ Una lectura curatorial del **florecimiento de la LIJ colombiana** entre 2000 y 2
                 │   │  React 18 + Babel Standalone (en navegador)  │    │
                 │   ├──────────────────────────────────────────────┤    │
                 │   │  src/app.jsx          ─ Root + TabBar        │    │
-                │   │   ├─ AdultApp                                │    │
+                │   │   ├─ AdultApp  (tab I)                       │    │
                 │   │   │    Hero · Filters · AtlasColombia ·      │    │
                 │   │   │    AtlasWorld · Network · Mural · Story  │    │
-                │   │   └─ LijApp                                  │    │
-                │   │        LijHero · Voces · Colombia · World ·  │    │
-                │   │        Ferias · Cronología · Red · Mural ·   │    │
-                │   │        DataStory · Colophon · AuthorDrawer   │    │
+                │   │   ├─ LijApp    (tab II)                      │    │
+                │   │   │    LijHero · Voces · Colombia · World ·  │    │
+                │   │   │    Ferias · Cronología · Red · Mural ·   │    │
+                │   │   │    DataStory · Colophon · AuthorDrawer   │    │
+                │   │   └─ TdApp     (tab III · Tiny Desk Kids)    │    │
+                │   │        TdHero · TdMarquee · TdSessions ·     │    │
+                │   │        TdProgram · TdShelf · TdColophon      │    │
+                │   │        (reusa el dataset LIJ del Vol. II)    │    │
                 │   ├──────────────────────────────────────────────┤    │
                 │   │  D3 v7  →  geoEquirectangular / geoMercator  │    │
                 │   │           / geoOrthographic · graticule      │    │
                 │   │  TopoJSON  →  countries-110m.json            │    │
                 │   ├──────────────────────────────────────────────┤    │
-                │   │  src/theme.css  +  src/lij-theme.css         │    │
+                │   │  src/theme.css · lij-theme.css ·             │    │
+                │   │            tinydesk-theme.css                │    │
                 │   │  src/blaa-fonts.css  →  fonts/BLAA-*.woff2   │    │
                 │   └──────────────────────────────────────────────┘    │
                 └───────────────────────────────────────────────────────┘
@@ -203,7 +228,8 @@ Autores_Colombianos/
 ├── README.md
 │
 ├── assets/
-│   └── lij-hero.png        ← ilustración LIJ generada con OpenAI
+│   ├── lij-hero.png        ← ilustración LIJ generada con OpenAI
+│   └── tinydesk-hero.png   ← foto de escena de la sala Tiny Desk Kids
 │
 ├── data/
 │   ├── dataset.json        ← Vol. I  · 497 autores · 1.588 publicaciones
@@ -215,8 +241,9 @@ Autores_Colombianos/
 │   └── blaa_readme.txt     ← licencia y origen de la tipografía BLAA
 │
 ├── src/
-│   ├── app.jsx             ← Root + TabBar + AdultApp + Colophon
+│   ├── app.jsx             ← Root + TabBar (3 tabs) + AdultApp + Colophon
 │   ├── lij-app.jsx         ← LijApp + LijDataStory
+│   ├── tinydesk-app.jsx    ← TdApp + TdMarquee + TdColophon (tab III)
 │   ├── hero.jsx            ← Hero del Vol. I (mapa animado de arcos)
 │   │
 │   ├── atlas-colombia.jsx  ← Mapa interno de Colombia (deptos · ciudades)
@@ -232,11 +259,18 @@ Autores_Colombianos/
 │   │   ├── lij-hero.jsx       ← Hero del Vol. II (ilustración IA + título)
 │   │   ├── lij-voces.jsx      ← Seis voces del oficio LIJ
 │   │   ├── lij-world.jsx      ← Mapa-mundi específico LIJ
-│   │   ├── lij-ferias.jsx     ← Bolonia · Guadalajara · Frankfurt
+│   │   ├── lij-ferias.jsx     ← Bolonia · Guadalajara · Frankfurt (totales absolutos)
 │   │   └── lij-cronologia.jsx ← Cronología 2000–2024
+│   │
+│   ├── tinydesk/             ← Sala Tiny Desk Kids (tab III)
+│   │   ├── td-hero.jsx        ← Hero de escena + signos (autores · sellos · países)
+│   │   ├── td-sessions.jsx    ← Set 01 · sesiones destacadas (voces más viajadas)
+│   │   ├── td-program.jsx     ← Programa por voz temática + cabezas de cartel
+│   │   └── td-shelf.jsx       ← Set 02 · estante buscable + marquesina de nombres
 │   │
 │   ├── theme.css           ← Tema editorial (paleta cinabrio · dorado · selva)
 │   ├── lij-theme.css       ← Overrides cromáticos del Vol. II
+│   ├── tinydesk-theme.css  ← Tema cálido de la sala Tiny Desk (paleta --td-*)
 │   ├── blaa-fonts.css      ← @font-face para BLAA (10 variantes)
 │   └── fonts/
 │       ├── BLAA-ExtraLight.woff2     · 200
@@ -268,8 +302,8 @@ Autores_Colombianos/
 | **Data** | Pares autor·editorial planos en JSON. Una entrada por publicación, con país, ciudad, lengua, URL del sello. | `data/dataset.json`, `data/lij_dataset.json` |
 | **Cartografía** | TopoJSON Natural Earth a 1:110m. Proyecciones y grátula calculadas en cliente con D3. | `data/countries-110m.json`, `src/atlas-*.jsx`, `src/lij/lij-world.jsx` |
 | **Render** | React 18 (UMD) + Babel Standalone — JSX compilado en el navegador. Cero build step. | `index.html`, `src/*.jsx` |
-| **Tipografía & tema** | BLAA + Cormorant Garamond + IBM Plex (Sans · Serif · Mono). Variables CSS con paleta editorial. | `src/blaa-fonts.css`, `src/theme.css`, `src/lij-theme.css` |
-| **Ilustración** | Hero del Vol. II generado con OpenAI (DALL·E / ChatGPT Image), tratamiento editorial. | `assets/lij-hero.png` |
+| **Tipografía & tema** | BLAA + Cormorant Garamond + IBM Plex (Sans · Serif · Mono). Variables CSS con paleta editorial, una por sala. | `src/blaa-fonts.css`, `src/theme.css`, `src/lij-theme.css`, `src/tinydesk-theme.css` |
+| **Ilustración** | Heros del Vol. II y de la sala Tiny Desk Kids generados con OpenAI (DALL·E / ChatGPT Image), tratamiento editorial. | `assets/lij-hero.png`, `assets/tinydesk-hero.png` |
 | **Curaduría** | Biografías, premios, obras y relevancia escritas y revisadas a mano sobre el ensayo de B. H. Robledo y archivo Banco de la República. | `data/lij_article.txt`, `uploads/lite_infant_juv.pdf` |
 
 ---
@@ -286,6 +320,16 @@ Autores_Colombianos/
 | `--dorado` (envejecido) | `#b58b3a` | numeración, separadores |
 | `--azul` (noche) | `#1d324a` | mapa mundi |
 | `--selva` | `#2e4a37` | LIJ · naturaleza |
+
+**Sala Tiny Desk Kids** (`src/tinydesk-theme.css`) — paleta cálida propia, en clave de tungsteno + colores de títere:
+
+| Token | Hex | Uso |
+|---|---|---|
+| `--td-night` | `#241710` | fondo oscuro cálido (sombra de tungsteno) |
+| `--td-cream` | `#f6ecd8` | papel de la sala |
+| `--td-amber` | `#e2922f` | brillo de tungsteno · acento principal |
+| `--td-coral` | `#d9624f` | coral de títere · acento del tab III |
+| `--td-rose` / `--td-teal` / `--td-leaf` / `--td-plum` | `#d97a8e` · `#3f93a3` · `#6b8f4e` · `#7d5a86` | acentos por voz temática |
 
 ### Tipografía
 
@@ -350,6 +394,10 @@ editorial cultural.
 
 > ℹ️ El prompt se conserva textual para reproducibilidad y trazabilidad editorial. Cualquier re-generación o variación queda documentada al lado de su prompt fuente.
 
+### Ilustración de la sala · `assets/tinydesk-hero.png`
+
+La foto de escena de la sala **Tiny Desk Kids** también fue generada con **OpenAI**, en clave de escenario íntimo de lectura en voz alta (mesa de concierto, luz de tungsteno, atmósfera de libro álbum). Se sirve como fondo del hero del tab III. Como el resto de assets de IA, su archivo fuente queda en `uploads/` junto a su prompt para trazabilidad.
+
 ---
 
 ## 🖥️ Comandos rápidos (la "CLI")
@@ -384,12 +432,13 @@ git add . && git commit -m "atlas: snapshot MMXXVI" && git push
 
 | Acción | Cómo |
 |---|---|
-| Cambiar volumen | Pestaña *Literatura general* ⇄ *Infantil & juvenil* |
-| Abrir ficha de autor | Click en cualquier nombre, retrato o nodo |
+| Cambiar de sala | Pestañas *Literatura general* · *Infantil & juvenil* · *Tiny Desk Kids* |
+| Abrir ficha de autor | Click en cualquier nombre, retrato, nodo o lomo del estante |
 | Cerrar ficha | `Esc` o click fuera |
 | Saltar a sección | Click en eyebrow del capítulo |
 | Modo impresión | navegar a `/index-print.html` |
 | Deep link a LIJ | `index.html#lij` |
+| Deep link a Tiny Desk Kids | `index.html#tinydesk` (o `#td`) |
 
 ---
 
@@ -637,7 +686,15 @@ Cada fila es un **par autor·editorial** (no un autor único): el mismo autor ap
 - **JSX en navegador** — no hay paso de bundling. Cada `.jsx` queda como `<script type="text/babel">`.
 - **Sin imports ES**. Todo cuelga de `window.*` para que Babel Standalone no tenga que resolver módulos.
 - **Una "ola" por sección** — cada capítulo del atlas es un `<section>` con eyebrow numérico (`I`, `II`, `III`…), título display y meta lateral.
-- **Tipos visuales por volumen.** Vol. I usa `--rojo` cinabrio; Vol. II usa `--lij-rojo` y `--selva` como acento.
+- **Tipos visuales por sala.** Vol. I usa `--rojo` cinabrio; Vol. II usa `--lij-rojo` y `--selva`; la sala Tiny Desk Kids usa la paleta cálida `--td-*` (tungsteno + colores de títere).
+- **Componentes compartidos.** `AuthorDrawer`, `TipProvider`, `SelectProvider` y `FilterProvider` se reutilizan entre las tres salas: la sala Tiny Desk no duplica fichas, abre el mismo cajón de autor del Vol. II.
+
+---
+
+## 🆕 Novedades recientes
+
+- **🎙️ Nueva sala Tiny Desk Kids (tab III).** Una tercera pestaña que reinterpreta el dataset de LIJ como una escena de lectura en voz alta: hero + marquesina, sesiones destacadas, programa de actos temáticos y estante buscable. Tema y paleta propios (`src/tinydesk-theme.css`, `src/tinydesk-app.jsx`, `src/tinydesk/`). Deep link `index.html#tinydesk`.
+- **🔢 Ferias LIJ con cifras estables.** Los totales de autores y sellos por feria (`src/lij/lij-ferias.jsx`) ahora son **absolutos por país** y ya no dependen de los filtros activos: el número no cambia al hacer clic en una tarjeta. Pulsar una feria solo resalta su país anfitrión en mapas y red, con copy y UI actualizados para dejarlo claro.
 
 ---
 
@@ -704,7 +761,7 @@ Este atlas no existiría sin:
 - ✍️ **Beatriz Helena Robledo B.** — cuya investigación *El florecimiento de la literatura infantil y juvenil en Colombia* es la columna vertebral del Volumen II. Sin su mirada, no hay capítulo LIJ.
 - 🔤 **Juan Pablo Fajardo** y el laboratorio **Piedra, Tijera, Papel (PTP)** — por la tipografía **BLAA**, regalo de patrimonio puesto al alcance de todos.
 - 🏛️ **Biblioteca Luis Ángel Arango** — porque sus letras metálicas de 1958 siguen escribiendo, ahora en pantallas.
-- 🤖 **OpenAI** — por las herramientas de generación de imagen (DALL·E / ChatGPT Image) que dieron forma a la ilustración hero del Volumen II.
+- 🤖 **OpenAI** — por las herramientas de generación de imagen (DALL·E / ChatGPT Image) que dieron forma a las ilustraciones hero del Volumen II y de la sala Tiny Desk Kids.
 - 🧠 **Anthropic · Claude (Design / Code)** — por co-escribir, refactorizar y maquetar este atlas junto al equipo humano.
 - 🗺️ **Natural Earth** — por el mundo a 1:110.000.000 en dominio público.
 - 📦 **D3, React, TopoJSON, IBM Plex, Google Fonts** — por hacer que un libro digital pese kilobytes y no megabytes.
