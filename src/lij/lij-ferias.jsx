@@ -13,13 +13,13 @@ const FAIRS = [
 function LijFerias({ data }) {
   const { filters, setKey } = useFilters();
 
-  // For each fair, count visible LIJ authors who publish in that country
+  // Totales ABSOLUTOS por feria — NO dependen de los filtros activos,
+  // para que el número nunca cambie al hacer clic y no genere confusión.
   const fairStats = useMemo(() => {
-    const visibleAuthors = data.authors.filter(a => authorMatches(a, filters));
     return FAIRS.map(f => {
       const auths = new Set();
       const eds = new Set();
-      for (const a of visibleAuthors) {
+      for (const a of data.authors) {
         for (const p of a.pubs) {
           if (p.p === f.country) {
             auths.add(a.n);
@@ -29,7 +29,7 @@ function LijFerias({ data }) {
       }
       return { ...f, authors: auths.size, editorials: eds.size };
     });
-  }, [data.authors, filters]);
+  }, [data.authors]);
 
   const ref = useFadeIn();
 
@@ -49,8 +49,12 @@ function LijFerias({ data }) {
 
         <p className="lede" style={{ marginTop: "1rem", maxWidth: "62ch" }}>
           Las ferias son el cuerpo visible del oficio: allí circulan derechos, premios, catálogos. La LIJ
-          colombiana entra y sale por <em>Bolonia, Guadalajara, Frankfurt, Madrid, Buenos Aires</em>. Pulsa
-          una feria para filtrar el archivo por su país anfitrión.
+          colombiana entra y sale por <em>Bolonia, Guadalajara, Frankfurt, Madrid, Buenos Aires</em>. Cada
+          tarjeta muestra cuántos autores y sellos colombianos publican en el país anfitrión.
+        </p>
+        <p className="marginalia" style={{ marginTop: "0.75rem" }}>
+          <span style={{ color: "var(--lij-rojo)" }}>◇</span>  Pulsa una tarjeta para resaltar ese país
+          en los mapas y la red. Las cifras de cada tarjeta no cambian: son siempre el total del país.
         </p>
 
         <div style={{
@@ -101,6 +105,22 @@ function LijFerias({ data }) {
                     </strong>
                     sellos
                   </span>
+                </div>
+                <div style={{
+                  marginTop: "0.85rem",
+                  fontFamily: "var(--f-mono)", fontSize: "0.6rem",
+                  letterSpacing: "0.18em", textTransform: "uppercase",
+                  color: active ? "var(--ivory)" : "var(--ink-soft)",
+                  opacity: active ? 1 : 0.7,
+                  display: "flex", alignItems: "center", gap: "0.4rem"
+                }}>
+                  <span style={{
+                    width: 7, height: 7, borderRadius: "50%",
+                    background: active ? "var(--ivory)" : "transparent",
+                    border: `1px solid ${active ? "var(--ivory)" : "var(--ink-soft)"}`,
+                    display: "inline-block", flexShrink: 0
+                  }} />
+                  {active ? "Resaltando en el atlas — pulsa para quitar" : "Pulsa para resaltar en el atlas"}
                 </div>
               </div>
             );

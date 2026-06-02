@@ -178,6 +178,11 @@ function TabBar({ active, setActive, dataAdult, dataLij }) {
             <span className="tab-no">II · {dataLij ? fmt(dataLij.totals.autores) : "…"} autores</span>
             <span className="tab-name">Infantil &amp; juvenil</span>
           </button>
+          <button className={"tab-btn" + (active === "tinydesk" ? " active" : "")}
+            onClick={() => setActive("tinydesk")}>
+            <span className="tab-no" style={{ color: "var(--td-coral, #d9624f)" }}>III · sesiones</span>
+            <span className="tab-name">Tiny Desk Kids</span>
+          </button>
         </div>
       </div>
     </div>
@@ -188,6 +193,7 @@ function TabBar({ active, setActive, dataAdult, dataLij }) {
 function Root() {
   const [active, setActive] = useState(() => {
     const h = location.hash.replace("#", "");
+    if (h === "tinydesk" || h === "td") return "tinydesk";
     if (h === "lij" || h.startsWith("lij-")) return "lij";
     return "adulto";
   });
@@ -206,10 +212,12 @@ function Root() {
   // Persist active tab in hash
   useEffect(() => {
     if (window.__PRINT_MODE) return;
-    if (active === "lij") {
+    if (active === "tinydesk") {
+      location.hash = "tinydesk";
+    } else if (active === "lij") {
       if (!location.hash.startsWith("#lij")) location.hash = "lij";
     } else {
-      if (location.hash.startsWith("#lij") || location.hash === "#adulto") history.replaceState(null, "", location.pathname);
+      if (location.hash.startsWith("#lij") || location.hash === "#adulto" || location.hash === "#tinydesk") history.replaceState(null, "", location.pathname);
     }
     // scroll top on tab change
     window.scrollTo({ top: 0, behavior: "auto" });
@@ -259,12 +267,15 @@ function Root() {
   return (
     <>
       <TabBar active={active} setActive={setActive} dataAdult={data} dataLij={lijData} />
-      {active === "adulto"
-        ? <AdultApp data={data} />
-        : (lijData
-            ? <LijApp data={lijData} />
-            : <div style={{ padding: "5rem 2rem", textAlign: "center", fontFamily: "var(--f-mono)", color: "var(--ink-soft)" }}>cargando atlas LIJ…</div>)
-      }
+      {active === "adulto" && <AdultApp data={data} />}
+      {active === "lij" && (lijData
+        ? <LijApp data={lijData} />
+        : <div style={{ padding: "5rem 2rem", textAlign: "center", fontFamily: "var(--f-mono)", color: "var(--ink-soft)" }}>cargando atlas LIJ…</div>
+      )}
+      {active === "tinydesk" && (lijData
+        ? <TdApp data={lijData} />
+        : <div style={{ padding: "5rem 2rem", textAlign: "center", fontFamily: "var(--f-mono)", color: "var(--ink-soft)" }}>preparando las sesiones…</div>
+      )}
     </>
   );
 }
