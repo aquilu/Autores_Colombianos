@@ -396,7 +396,55 @@ editorial cultural.
 
 ### Ilustración de la sala · `assets/tinydesk-hero.png`
 
-La foto de escena de la sala **Tiny Desk Kids** también fue generada con **OpenAI**, en clave de escenario íntimo de lectura en voz alta (mesa de concierto, luz de tungsteno, atmósfera de libro álbum). Se sirve como fondo del hero del tab III. Como el resto de assets de IA, su archivo fuente queda en `uploads/` junto a su prompt para trazabilidad.
+La foto de escena de la sala **Tiny Desk Kids** también fue generada con **OpenAI**, en clave de escenario íntimo de lectura en voz alta (mesa de concierto, luz de tungsteno, atmósfera de libro álbum). Se sirve como fondo del hero del tab III.
+
+**Modelo:** OpenAI ChatGPT Image · `gpt-image-1`
+**Render servido:** `assets/tinydesk-hero.png`
+**Formato:** horizontal 16:9, fotorealista
+
+> ℹ️ No se conserva el prompt interno exacto del generador; el bloque siguiente es un **prompt equivalente y muy cercano** al que produjo la imagen final, registrado para reproducibilidad y trazabilidad editorial.
+
+#### 📝 Prompt (OpenAI · ChatGPT Image)
+
+```text
+Crea una imagen en formato horizontal 16:9, estilo fotorealista 4K, inspirada en
+la estética íntima y recargada de un concierto tipo Tiny Desk, pero ambientada en
+literatura infantil y juvenil. No incluir personas humanas. La escena debe mostrar
+un escritorio blanco o de madera clara en primer plano, lleno de libros infantiles
+abiertos y cerrados, con ilustraciones coloridas de animales, bosques, criaturas
+mágicas y personajes de cuento.
+
+Sobre el escritorio deben aparecer varios títeres infantiles con estética nostálgica
+de los años 80, tipo muñecos de felpa expresivos, coloridos y amables, sentados
+alrededor de los libros como si fueran lectores, narradores o pequeños músicos.
+Incluir un micrófono antiguo de escritorio en el centro, una lámpara vintage con luz
+cálida, lápices de colores, flores en un florero pequeño y pequeños juguetes
+decorativos.
+
+En el fondo, crear una pared completa de estanterías de madera, llenas de libros
+infantiles con lomos de colores rojo, azul, amarillo, verde y naranja. Entre los
+libros deben verse muñecos, títeres, objetos curiosos, pequeños globos terráqueos,
+carteles de lectura, ilustraciones infantiles y detalles artesanales. La composición
+debe recordar el ambiente acogedor, íntimo y creativo de un Tiny Desk, pero
+transformado en un escenario para cuentos infantiles.
+
+Agregar un pequeño letrero de madera sobre el escritorio que diga "Tiny Desk Kids".
+En una pizarra pequeña al lado izquierdo escribir: "150+ authors", "45 publishers",
+"32 locations". Mantener el fondo ligeramente desenfocado para permitir superponer
+texto o datos de dashboard encima. La iluminación debe ser cálida, suave, de tarde,
+con una atmósfera mágica, acogedora y editorial. Usar colores pastel con acentos
+vibrantes. Sensación de biblioteca infantil, narración oral, títeres clásicos,
+imaginación y libros ilustrados.
+```
+
+**Negative prompt:**
+
+```text
+No incluir personas reales, no bandas musicales humanas, no logos oficiales de NPR,
+no marcas registradas visibles, no texto excesivo, no estética oscura, no terror,
+no muñecos inquietantes, no rostros deformes, no manos humanas, no ambiente moderno
+frío, no escenario vacío.
+```
 
 ---
 
